@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-uppercase mb-0">Profile List</h5>
+                <a href="{% url 'profile' %}"><button>Create Profile</button></a>
+            </div>
+            <div class="table-responsive">
+                <table class="table no-wrap user-table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="border-0 text-uppercase font-medium pl-4">Sr. No</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">City</th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">State</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for profile in profiles %}
+                    <tr>
+                      <td class="pl-4">{{forloop.counter}}</td>
+                      <td>
+                          <h5 class="font-medium mb-0">{{profile.first_name}} {{profile.last_name}}</h5>
+                      </td>
+                      <td>
+                          <span class="text-muted">{{profile.city}}</span><br>
+                      </td>
+                        <td>
+                          <span class="text-muted">{{profile.state}}</span><br>
+                      </td>
+                      <td>
+                          <a href="{% url 'delete_profile' profile_id=profile.id %}"><button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button></a>
+                          <a href="{% url 'edit_profile' profile_id=profile.id %}"> <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
